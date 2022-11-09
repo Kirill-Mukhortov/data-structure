@@ -1,10 +1,7 @@
 import { Node } from './node.js';
 
 class LinkedList {
-
     linkedList = new Array();
-    firstNode = null;
-    lastNode = null;
 
     getList() {
         return this.linkedList;
@@ -15,16 +12,19 @@ class LinkedList {
     }
 
     get first() {
-        return this.firstNode?.value;
+        return this.linkedList[this.linkedList.length - 1]?.first;
     }
 
     get last() {
-        return this.lastNode?.value;
+        return this.linkedList[this.linkedList.length - 1]?.last;
     }
 
     add(value) {
         const newNode = new Node(value);
         this.linkedList.push(newNode);
+
+        newNode.first = this.linkedList[0];
+        newNode.last  = this.linkedList[this.linkedList.length - 1];
     }
 
     next() {
@@ -46,5 +46,5 @@ list.add(2);
 list.add(3);
 
 console.log(list.getList());
-// console.log(list.first.value);
-// console.log(list.last.value);
+console.log(list.first.value);
+console.log(list.last.value);
