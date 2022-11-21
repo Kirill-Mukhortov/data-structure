@@ -1,11 +1,11 @@
 import { Node } from "./node.js";
 
 class LinkedList {
-    first = null;
-    last = null;
+    #first = null;
+    #last = null;
 
     get getList() {
-        let node = this.first;
+        let node = this.#first;
         let out = 'LinkedList => ';
         while (node) {
             out += ` ${node.value} =>`;
@@ -21,28 +21,28 @@ class LinkedList {
     //
     // }
 
-    // get first() {
-    //
-    // }
+    get first() {
+        return this.#first;
+    }
 
-    // get last() {
-    //
-    // }
+    get last() {
+        return this.#last;
+    }
 
     add(value) {
         const newNode = new Node(value);
 
-        if (!this.first) {
-            this.first = newNode;
+        if (!this.#first) {
+            this.#first = newNode;
         }
 
-        newNode.prev = this.last;
+        newNode.prev = this.#last;
 
-        if (this.last) {
-            this.last.next = newNode;
+        if (this.#last) {
+            this.#last.next = newNode;
         }
 
-        this.last = newNode;
+        this.#last = newNode;
     }
 
     // next() {
