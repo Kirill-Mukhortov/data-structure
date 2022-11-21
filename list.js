@@ -1,10 +1,11 @@
-import { Node } from "./node.js";
+import { Node } from './node.js';
 
 class LinkedList {
     #first = null;
     #last = null;
+    #length = 0;
 
-    get getList() {
+    get list() {
         let node = this.#first;
         let out = 'LinkedList => ';
         while (node) {
@@ -17,9 +18,9 @@ class LinkedList {
         return out;
     }
 
-    // get length() {
-    //
-    // }
+    get length() {
+        return this.#length;
+    }
 
     get first() {
         return this.#first;
@@ -36,18 +37,15 @@ class LinkedList {
             this.#first = newNode;
         }
 
-        newNode.prev = this.#last;
+        newNode.setPrev(this.#last);
 
         if (this.#last) {
-            this.#last.next = newNode;
+            this.#last.setNext(newNode);
         }
 
         this.#last = newNode;
+        this.#length += 1;
     }
-
-    // next() {
-    //
-    // }
 
     // clear() {
     //
@@ -59,7 +57,8 @@ list.add(1);
 list.add(2);
 list.add(3);
 
-console.log(list.getList);               // LinkedList =>  1 => 2 => 3 => NULL
+console.log(list.list);                  // LinkedList =>  1 => 2 => 3 => NULL
+console.log(list.length);                // 3
 console.log(list.first.value);           // 1
 console.log(list.last.value);            // 3
 console.log(list.first.next.value);      // 2
