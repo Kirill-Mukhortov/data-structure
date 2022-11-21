@@ -5,14 +5,16 @@ class LinkedList {
     last = null;
 
     get getList() {
-        // let node = this.first;
-        // let out = 'LinkedList => ';
-        // while (node) {
-        //     out += ` ${node.value} =>`;
-        //     node = node.next;
-        // }
-        //
-        // console.log(out);
+        let node = this.first;
+        let out = 'LinkedList => ';
+        while (node) {
+            out += ` ${node.value} =>`;
+            node = node.next;
+        }
+
+        out += ' NULL';
+
+        return out;
     }
 
     // get length() {
@@ -57,6 +59,8 @@ list.add(1);
 list.add(2);
 list.add(3);
 
-console.log(list.getList);
-// console.log(list.first.value);
-// console.log(list.last.value);
+console.log(list.getList);               // LinkedList =>  1 => 2 => 3 => NULL
+console.log(list.first.value);           // 1
+console.log(list.last.value);            // 3
+console.log(list.first.next.value);      // 2
+console.log(list.first.next.prev.value); // 1
