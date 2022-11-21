@@ -5,6 +5,4 @@ export class Node {
 
     next = null;
     prev = null;
-    first = null;
-    last = null;
 }
