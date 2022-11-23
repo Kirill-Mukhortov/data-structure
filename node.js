@@ -3,22 +3,22 @@ export class Node {
         this.value = value;
     }
 
-    #next = null;
-    #prev = null;
+    next = null;
+    prev = null;
 
     get next() {
-        return this.#next;
+        return this.next;
     }
 
     get prev() {
-        return this.#prev;
+        return this.prev;
     }
 
     setNext(link) {
-        this.#next = link;
+        this.next = link;
     }
 
     setPrev(link) {
-        this.#prev = link;
+        this.prev = link;
     }
 }

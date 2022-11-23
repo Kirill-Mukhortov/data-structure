@@ -7,7 +7,7 @@ class LinkedList {
 
     get structure() {
         let node = this.#first;
-        let out = 'LinkedList => ';
+        let out = 'LinkedList =>';
 
         while (node) {
             out += ` ${node.value} =>`;
@@ -48,6 +48,14 @@ class LinkedList {
         return this;
     }
 
+    unshift(value) {
+        const newNode = new Node(value);
+        const current = this.#first;
+
+        this.#first = newNode;
+        this.#first.setNext(current);
+    }
+
 
     clear() {
         this.#first = null;
@@ -59,11 +67,13 @@ class LinkedList {
 const list = new LinkedList();
 list.push(1).push(2).push(3);
 
-console.log(list.structure);             // LinkedList =>  1 => 2 => 3 => NULL
-console.log(list.length);                // 3
-console.log(list.first.value);           // 1
-console.log(list.last.value);            // 3
-console.log(list.first.next.value);      // 2
-console.log(list.first.next.prev.value); // 1
-list.clear();
-console.log(list.structure);             // LinkedList => NULL
+// console.log(list.structure);             // LinkedList =>  1 => 2 => 3 => NULL
+list.unshift(5);
+console.log(list.structure);
+// console.log(list.length);                // 3
+// console.log(list.first.value);           // 1
+// console.log(list.last.value);            // 3
+// console.log(list.first.next.value);      // 2
+// console.log(list.first.next.prev.value); // 1
+// list.clear();
+// console.log(list.structure);             // LinkedList => NULL
