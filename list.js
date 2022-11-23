@@ -8,6 +8,7 @@ class LinkedList {
     get structure() {
         let node = this.#first;
         let out = 'LinkedList => ';
+
         while (node) {
             out += ` ${node.value} =>`;
             node = node.next;
@@ -30,22 +31,23 @@ class LinkedList {
         return this.#last;
     }
 
-    add(value) {
+    push(value) {
         const newNode = new Node(value);
 
-        if (!this.#first) {
+        if (!this.#first && !this.#last) {
             this.#first = newNode;
+            this.#last = newNode;
         }
 
         newNode.setPrev(this.#last);
 
-        if (this.#last) {
-            this.#last.setNext(newNode);
-        }
-
+        this.#last.setNext(newNode);
         this.#last = newNode;
+
         this.#length += 1;
+        return this;
     }
+
 
     clear() {
         this.#first = null;
@@ -55,9 +57,7 @@ class LinkedList {
 }
 
 const list = new LinkedList();
-list.add(1);
-list.add(2);
-list.add(3);
+list.push(1).push(2).push(3);
 
 console.log(list.structure);             // LinkedList =>  1 => 2 => 3 => NULL
 console.log(list.length);                // 3
