@@ -56,6 +56,11 @@ class LinkedList {
         this.#first.setNext(current);
     }
 
+    pop() {
+        this.#last.prev.setNext(null);
+        this.#last = this.#last.prev;
+    }
+
 
     clear() {
         this.#first = null;
@@ -69,6 +74,10 @@ list.push(1).push(2).push(3);
 
 // console.log(list.structure);             // LinkedList =>  1 => 2 => 3 => NULL
 list.unshift(5);
+console.log(list.structure);
+list.pop();
+console.log(list.structure);
+list.push(6);
 console.log(list.structure);
 // console.log(list.length);                // 3
 // console.log(list.first.value);           // 1
