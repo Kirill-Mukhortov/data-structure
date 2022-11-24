@@ -31,36 +31,45 @@ class LinkedList {
         return this.#last;
     }
 
+    // Вставка в конец
     push(value) {
         const newNode = new Node(value);
 
         if (!this.#first && !this.#last) {
             this.#first = newNode;
             this.#last = newNode;
+        } else {
+            newNode.setPrev(this.#last);
+            this.#last.setNext(newNode);
         }
 
-        newNode.setPrev(this.#last);
-
-        this.#last.setNext(newNode);
         this.#last = newNode;
 
         this.#length += 1;
         return this;
     }
 
+    // Вставка в начало
     unshift(value) {
         const newNode = new Node(value);
         const current = this.#first;
 
         this.#first = newNode;
         this.#first.setNext(current);
+        return this;
     }
 
+    // Удаление последнего элемента
     pop() {
         this.#last.prev.setNext(null);
         this.#last = this.#last.prev;
     }
 
+    // Удаление первого элемента
+    shift() {
+        this.#first.next.setPrev(null);
+        this.#first = this.#first.next;
+    }
 
     clear() {
         this.#first = null;
@@ -71,13 +80,8 @@ class LinkedList {
 
 const list = new LinkedList();
 list.push(1).push(2).push(3);
-
-// console.log(list.structure);             // LinkedList =>  1 => 2 => 3 => NULL
-list.unshift(5);
-console.log(list.structure);
-list.pop();
-console.log(list.structure);
-list.push(6);
+console.log(list.structure);             // LinkedList =>  1 => 2 => 3 => NULL
+console.log(list.pop());
 console.log(list.structure);
 // console.log(list.length);                // 3
 // console.log(list.first.value);           // 1
