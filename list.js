@@ -6,18 +6,17 @@ class LinkedList {
     #length = 0;
 
     get structure() {
-        // let node = this.#first;
-        // let out = 'LinkedList =>';
-        //
-        // while (node) {
-        //     out += ` ${node.value} =>`;
-        //     node = node.next;
-        // }
-        //
-        // out += ' NULL';
-        //
-        // return out;
-        return this;
+        let node = this.#first;
+        let out = 'LinkedList =>';
+
+        while (node) {
+            out += ` ${node.value} =>`;
+            node = node.next;
+        }
+
+        out += ' NULL';
+
+        return out;
     }
 
     get length() {
@@ -95,6 +94,21 @@ class LinkedList {
         }
     }
 
+    // Поиск элемента по значению
+    findByValue(value) {
+        let current = this.#first;
+
+        while (current.value !== value) {
+            if (current.next === null) {
+              throw new Error('Value not found');
+            } else {
+                current = current.next;
+            }
+        }
+
+        return current;
+    }
+
     // Очистка связанного списка
     clear() {
         this.#first = null;
@@ -105,8 +119,8 @@ class LinkedList {
 
 const list = new LinkedList();
 list.push(1).push(2).push(3);
-// list.shift();
-console.log(list.structure);             // LinkedList =>  1 => 2 => 3 => NULL
+console.log(list.findByValue(3));
+// console.log(list.structure);             // LinkedList =>  1 => 2 => 3 => NULL
 // console.log(list.pop());
 // console.log(list.structure);
 // console.log(list.length);                // 3
