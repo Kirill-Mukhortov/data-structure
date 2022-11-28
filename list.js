@@ -6,17 +6,18 @@ class LinkedList {
     #length = 0;
 
     get structure() {
-        let node = this.#first;
-        let out = 'LinkedList =>';
-
-        while (node) {
-            out += ` ${node.value} =>`;
-            node = node.next;
-        }
-
-        out += ' NULL';
-
-        return out;
+        // let node = this.#first;
+        // let out = 'LinkedList =>';
+        //
+        // while (node) {
+        //     out += ` ${node.value} =>`;
+        //     node = node.next;
+        // }
+        //
+        // out += ' NULL';
+        //
+        // return out;
+        return this;
     }
 
     get length() {
@@ -61,6 +62,7 @@ class LinkedList {
 
         this.#first = newNode;
         this.#first.setNext(current);
+        this.#length += 1;
         return this;
     }
 
@@ -75,6 +77,7 @@ class LinkedList {
         } else {
             this.#last.prev.setNext(null);
             this.#last = this.#last.prev;
+            this.#length -= 1;
         }
     }
 
@@ -88,9 +91,11 @@ class LinkedList {
         } else {
             this.#first.next.setPrev(null);
             this.#first = this.#first.next;
+            this.#length -= 1;
         }
     }
 
+    // Очистка связанного списка
     clear() {
         this.#first = null;
         this.#last = null;
@@ -99,8 +104,8 @@ class LinkedList {
 }
 
 const list = new LinkedList();
-list.push(1);
-list.shift();
+list.push(1).push(2).push(3);
+// list.shift();
 console.log(list.structure);             // LinkedList =>  1 => 2 => 3 => NULL
 // console.log(list.pop());
 // console.log(list.structure);
