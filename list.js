@@ -31,6 +31,11 @@ class LinkedList {
         return this.#last;
     }
 
+    // Проверка пустой список или нет
+    isEmpty() {
+        return this.#length === 0 || this.#first === null;
+    }
+
     // Вставка в конец
     push(value) {
         const newNode = new Node(value);
@@ -61,14 +66,29 @@ class LinkedList {
 
     // Удаление последнего элемента
     pop() {
-        this.#last.prev.setNext(null);
-        this.#last = this.#last.prev;
+        if (this.isEmpty()) {
+            throw new Error('List is empty')
+        }
+
+        if (this.#length === 1) {
+            this.clear();
+        } else {
+            this.#last.prev.setNext(null);
+            this.#last = this.#last.prev;
+        }
     }
 
     // Удаление первого элемента
     shift() {
-        this.#first.next.setPrev(null);
-        this.#first = this.#first.next;
+        if (this.isEmpty()) {
+            throw new Error('List is empty')
+        }
+        if (this.#length === 1) {
+            this.clear();
+        } else {
+            this.#first.next.setPrev(null);
+            this.#first = this.#first.next;
+        }
     }
 
     clear() {
@@ -79,10 +99,11 @@ class LinkedList {
 }
 
 const list = new LinkedList();
-list.push(1).push(2).push(3);
+list.push(1);
+list.shift();
 console.log(list.structure);             // LinkedList =>  1 => 2 => 3 => NULL
-console.log(list.pop());
-console.log(list.structure);
+// console.log(list.pop());
+// console.log(list.structure);
 // console.log(list.length);                // 3
 // console.log(list.first.value);           // 1
 // console.log(list.last.value);            // 3
