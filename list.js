@@ -85,6 +85,7 @@ class LinkedList {
         if (this.isEmpty()) {
             throw new Error('List is empty')
         }
+
         if (this.#length === 1) {
             this.clear();
         } else {
@@ -109,6 +110,27 @@ class LinkedList {
         return current;
     }
 
+    // Удаление элемента по значению
+    removeByValue(value) {
+        try {
+            const nodeToRemove = this.findByValue(value);
+
+            if (nodeToRemove.prev === null) {
+              return this.shift();
+            }
+
+            if (nodeToRemove.next === null) {
+                return this.pop();
+            }
+
+            nodeToRemove.next.setPrev(nodeToRemove.prev);
+            nodeToRemove.prev.setNext(nodeToRemove.next);
+            this.#length -= 1;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     // Очистка связанного списка
     clear() {
         this.#first = null;
@@ -119,14 +141,16 @@ class LinkedList {
 
 const list = new LinkedList();
 list.push(1).push(2).push(3);
-console.log(list.findByValue(3));
-// console.log(list.structure);             // LinkedList =>  1 => 2 => 3 => NULL
+console.log(list.length);
+
+console.log(list.removeByValue(3));
+console.log(list.structure);
 // console.log(list.pop());
 // console.log(list.structure);
-// console.log(list.length);                // 3
-// console.log(list.first.value);           // 1
-// console.log(list.last.value);            // 3
-// console.log(list.first.next.value);      // 2
-// console.log(list.first.next.prev.value); // 1
+console.log(list.length);
+// console.log(list.first.value);
+// console.log(list.last.value);
+// console.log(list.first.next.value);
+// console.log(list.first.next.prev.value);
 // list.clear();
-// console.log(list.structure);             // LinkedList => NULL
+// console.log(list.structure);
