@@ -99,11 +99,27 @@ describe('Linked List', () => {
         expect(list.findByValue(2).value).toBe(2);
     });
 
-    test('RemoveByValue', () => {
+    test('removeOnceByValue', () => {
         const list = initWithValues();
-        list.removeByValue(2);
+        list.removeOnceByValue(2);
         expect(list.convertValuesToString()).toBe('1,3');
         expect(list.length).toBe(2);
+    });
+
+    test('removeAllByValue', () => {
+        const list = new LinkedList();
+        list.insertLast(1).insertLast(2).insertLast(2).insertLast(3);
+
+        list.removeAllByValue(2);
+        expect(list.convertValuesToString()).toBe('1,3');
+        expect(list.length).toBe(2);
+
+        list.clear();
+
+        list.insertLast(1).insertLast(2).insertLast(2).insertLast(2);
+        list.removeAllByValue(2);
+        expect(list.convertValuesToString()).toBe('1');
+        expect(list.length).toBe(1);
     });
 
     test('InsertBefore', () => {
@@ -136,11 +152,24 @@ describe('Linked List', () => {
         expect(list.length).toBe(3);
     });
 
+    test('Clear', () => {
+        const list = initWithValues();
+        list.clear()
+        expect(list.length).toBe(0);
+        expect(list.first).toBeNull();
+        expect(list.last).toBeNull();
+    });
+
     test('Throw Errors when call methods on empty list', () => {
         const list = new LinkedList();
+        const listWithValues = new LinkedList().insertLast(1).insertLast(2);
 
         expect(() => {
             list.removeLast();
+        }).toThrow('List is empty');
+
+        expect(() => {
+            list.removeAllByValue();
         }).toThrow('List is empty');
 
         expect(() => {
@@ -152,11 +181,15 @@ describe('Linked List', () => {
         }).toThrow('List is empty');
 
         expect(() => {
+            listWithValues.findByValue(3);
+        }).toThrow('Value not found');
+
+        expect(() => {
             list.reverse();
         }).toThrow('List is empty');
 
         try {
-            list.removeByValue(5);
+            list.removeOnceByValue(5);
             list.insertBefore(1, 0);
             list.insertAfter(1, 2);
             list.replace(1, 2);

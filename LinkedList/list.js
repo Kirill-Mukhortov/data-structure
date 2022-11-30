@@ -117,7 +117,7 @@ export class LinkedList {
         return current;
     }
 
-    removeByValue(value) {
+    removeOnceByValue(value) {
         try {
             let nodeToRemove = this.findByValue(value);
 
@@ -137,6 +137,37 @@ export class LinkedList {
         } catch (error) {
             console.log(error);
         }
+    }
+
+    removeAllByValue(value) {
+        if (this.isEmpty) {
+            throw new Error('List is empty');
+        }
+
+        let nodeToRemove = null;
+        let currentNode = this.#first;
+
+        while (this.#first && this.#first.value === value) {
+            nodeToRemove = this.#first;
+            this.#first = this.#first.next;
+        }
+
+        if (currentNode !== null) {
+            while (currentNode.next) {
+                if (currentNode.next.value === value) {
+                    nodeToRemove = currentNode.next;
+                    currentNode.next = currentNode.next.next;
+                    this.#length -= 1;
+                } else {
+                    currentNode = currentNode.next;
+                }
+            }
+        }
+
+        if (this.#last?.value === value) {
+            this.#last = currentNode;
+        }
+
     }
 
     insertBefore(target, value) {
