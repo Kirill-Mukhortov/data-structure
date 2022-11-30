@@ -1,6 +1,6 @@
 import { Node } from './node.js';
 
-class LinkedList {
+export class LinkedList {
     #first = null;
     #last = null;
     #length = 0;
@@ -35,8 +35,7 @@ class LinkedList {
         return this.#length === 0 || this.#first === null;
     }
 
-    // Вставка в конец
-    push(value) {
+    insertLast(value) {
         let newNode = new Node(value);
 
         if (!this.#first && !this.#last) {
@@ -55,8 +54,7 @@ class LinkedList {
         return this;
     }
 
-    // Вставка в начало
-    unshift(value) {
+    insertFirst(value) {
         let newNode = new Node(value);
         let current = this.#first;
 
@@ -68,8 +66,7 @@ class LinkedList {
         return this;
     }
 
-    // Удаление последнего элемента
-    pop() {
+    removeLast() {
         if (this.isEmpty) {
             throw new Error('List is empty')
         }
@@ -83,8 +80,7 @@ class LinkedList {
         }
     }
 
-    // Удаление первого элемента
-    shift() {
+    removeFirst() {
         if (this.isEmpty) {
             throw new Error('List is empty')
         }
@@ -98,7 +94,6 @@ class LinkedList {
         }
     }
 
-    // Поиск элемента по значению
     findByValue(value) {
         if (this.isEmpty) {
             throw new Error('List is empty')
@@ -117,17 +112,16 @@ class LinkedList {
         return current;
     }
 
-    // Удаление элемента по значению
     removeByValue(value) {
         try {
             const nodeToRemove = this.findByValue(value);
 
             if (nodeToRemove.prev === null) {
-              return this.shift();
+              return this.removeFirst();
             }
 
             if (nodeToRemove.next === null) {
-                return this.pop();
+                return this.removeLast();
             }
 
             nodeToRemove.next.setPrev(nodeToRemove.prev);
@@ -140,15 +134,14 @@ class LinkedList {
         }
     }
 
-    // Поиск по значению и вставка перед
-    insertBefore(key, value) {
+    insertBefore(target, value) {
         try {
-            let nodeToInsertBefore = this.findByValue(key);
+            let nodeToInsertBefore = this.findByValue(target);
             let newNode = new Node(value);
 
             if (nodeToInsertBefore.prev === null) {
                 this.#length += 1;
-                return this.unshift(value);
+                return this.insertFirst(value);
             }
 
             nodeToInsertBefore.prev.setNext(newNode);
@@ -163,14 +156,13 @@ class LinkedList {
         }
     }
 
-    // Поиск по значению и вставка после
-    insertAfter(key, value) {
+    insertAfter(target, value) {
         try {
-            let nodeToInsertAfter = this.findByValue(key);
+            let nodeToInsertAfter = this.findByValue(target);
             let newNode = new Node(value);
 
             if (nodeToInsertAfter.next === null) {
-                return this.push(value);
+                return this.insertLast(value);
                 this.#length += 1;
             }
 
@@ -186,7 +178,16 @@ class LinkedList {
         }
     }
 
-    // Развернуть список в обратном порядке
+    replace(target, newValue) {
+        try {
+          const nodeToreplace = this.findByValue(target);
+          nodeToreplace.value = newValue;
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     reverse() {
         if (this.isEmpty) {
             throw new Error('List is empty')
@@ -219,21 +220,30 @@ class LinkedList {
         return this;
     }
 
-    // Очистка связанного списка
     clear() {
         this.#first = null;
         this.#last = null;
         this.#length = 0;
     }
+
+    convertValuesToString() {
+        const nodes = [];
+        let currentNode = this.#first;
+
+        while (currentNode) {
+            nodes.push(currentNode);
+            currentNode = currentNode.next;
+        }
+        return nodes.map((node) => node.value).toString();
+    }
+
 }
 
 const list = new LinkedList();
-list.push(1).push(2).push(3);
-// console.log('0 =>', list.structure);
-list.insertAfter(2, 9);
-console.log('1 =>', list.structure);
-list.reverse();
-console.log('2=>', list.structure);
+list.insertLast(1).insertLast(2).insertLast(3);
+// console.log(list.convertValuesToString());
+// list.reverse();
+// console.log('2=>', list.structure);
 // list.reverse();
 // console.log(list.structure);
 
@@ -244,8 +254,8 @@ console.log('2=>', list.structure);
 // console.log(list.findByValue());
 
 // console.log(list.removeByValue(3));
-// console.log(list.pop());
-// console.log(list.pop());
+// console.log(list.removeLast());
+// console.log(list.removeLast());
 // console.log(list.length);
 // console.log(list.first.value);
 // console.log(list.last.value);
