@@ -2,7 +2,7 @@
   "name": "data-structure",
   "version": "1.0.0",
   "description": "Base data-structures in javascript",
-  "main": "list.js",
+  "main": "",
   "type": "module",
   "scripts": {
     "test": "jest"

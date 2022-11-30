@@ -101,35 +101,35 @@ describe('Linked List', () => {
 
     test('RemoveByValue', () => {
         const list = initWithValues();
-        list.removeByValue(2)
+        list.removeByValue(2);
         expect(list.convertValuesToString()).toBe('1,3');
         expect(list.length).toBe(2);
     });
 
     test('InsertBefore', () => {
         const list = initWithValues();
-        list.insertBefore(2, 9)
+        list.insertBefore(2, 9);
         expect(list.convertValuesToString()).toBe('1,9,2,3');
         expect(list.length).toBe(4);
     });
 
     test('InsertAfter', () => {
         const list = initWithValues();
-        list.insertAfter(2, 9)
+        list.insertAfter(2, 9);
         expect(list.convertValuesToString()).toBe('1,2,9,3');
         expect(list.length).toBe(4);
     });
 
     test('Replace', () => {
         const list = initWithValues();
-        list.replace(2, 9)
+        list.replace(2, 9);
         expect(list.convertValuesToString()).toBe('1,9,3');
         expect(list.length).toBe(3);
     });
 
     test('Reverse', () => {
         const list = initWithValues();
-        list.reverse()
+        list.reverse();
         expect(list.convertValuesToString()).toBe('3,2,1');
         expect(list.first.prev).toBeNull();
         expect(list.last.next).toBeNull();
