@@ -1,4 +1,4 @@
-import { describe, expect, test } from '@jest/globals';
+import { beforeAll, beforeEach, describe, expect, test } from '@jest/globals';
 import { LinkedList } from './list.js';
 
 const initWithValues = () => {
@@ -12,187 +12,185 @@ const initWithValues = () => {
 };
 
 describe('Linked List', () => {
+    let listWithValues;
+    let emptyList;
+
+    beforeEach(() => {
+        listWithValues = initWithValues();
+        emptyList = new LinkedList();
+    })
+
     test('Should create list instance', () => {
-        const list = initWithValues();
-        expect(list).toBeInstanceOf(LinkedList);
+        expect(listWithValues).toBeInstanceOf(LinkedList);
     });
 
     test('LinkedList length should be equal to three', () => {
-        const list = initWithValues();
-        expect(list.length).toBe(3);
+        expect(listWithValues.length).toBe(3);
     });
 
     test('List with values', () => {
-        const list = initWithValues();
-        expect(list.convertValuesToString()).toBe('1,2,3');
-        expect(list.first.value).toBe(1);
-        expect(list.last.value).toBe(3);
+        expect(listWithValues.convertValuesToString()).toBe('1,2,3');
+        expect(listWithValues.first.value).toBe(1);
+        expect(listWithValues.last.value).toBe(3);
     });
 
     test('List is empty', () => {
-        const list = new LinkedList();
-        expect(list.isEmpty).toBeTruthy();
+        expect(emptyList.isEmpty).toBeTruthy();
     });
 
     test('First element does not has link on prev node', () => {
-        const list = initWithValues();
-        expect(list.first.prev).toBeNull();
+        expect(listWithValues.first.prev).toBeNull();
     });
 
     test('Last element does not has link on next node', () => {
-        const list = initWithValues();
-        expect(list.last.next).toBeNull();
+        expect(listWithValues.last.next).toBeNull();
     });
 
     test('InsertLast', () => {
-        const list = initWithValues();
-        expect(list.insertLast(4).convertValuesToString()).toBe('1,2,3,4');
-        expect(list.last.next).toBeNull();
-        expect(list.length).toBe(4);
+        expect(listWithValues.insertLast(4).convertValuesToString()).toBe('1,2,3,4');
+        expect(listWithValues.last.next).toBeNull();
+        expect(listWithValues.length).toBe(4);
     });
 
     test('InsertLast and InsertFirst', () => {
-        const list = new LinkedList();
-        list.insertLast(1);
-        list.insertFirst(2);
-        expect(list.convertValuesToString()).toBe('2,1');
-        expect(list.first.prev).toBeNull();
-        expect(list.last.next).toBeNull();
-        expect(list.length).toBe(2);
+        emptyList.insertLast(1);
+        emptyList.insertFirst(2);
+
+        expect(emptyList.convertValuesToString()).toBe('2,1');
+        expect(emptyList.first.prev).toBeNull();
+        expect(emptyList.last.next).toBeNull();
+        expect(emptyList.length).toBe(2);
     });
 
     test('InsertFirst', () => {
-        const list = initWithValues();
-        expect(list.insertFirst(0).convertValuesToString()).toBe('0,1,2,3');
-        expect(list.first.prev).toBeNull();
-        expect(list.length).toBe(4);
+        expect(listWithValues.insertFirst(0).convertValuesToString()).toBe('0,1,2,3');
+        expect(listWithValues.first.prev).toBeNull();
+        expect(listWithValues.length).toBe(4);
     });
 
     test('InsertFirst and InsertLast', () => {
-        const list = new LinkedList();
-        list.insertFirst(1);
-        list.insertLast(2);
-        expect(list.convertValuesToString()).toBe('1,2');
-        expect(list.first.prev).toBeNull();
-        expect(list.last.next).toBeNull();
-        expect(list.length).toBe(2);
+        emptyList.insertFirst(1);
+        emptyList.insertLast(2);
+
+        expect(emptyList.convertValuesToString()).toBe('1,2');
+        expect(emptyList.first.prev).toBeNull();
+        expect(emptyList.last.next).toBeNull();
+        expect(emptyList.length).toBe(2);
     });
 
     test('RemoveLast', () => {
-        const list = initWithValues();
-        list.removeLast();
-        expect(list.convertValuesToString()).toBe('1,2');
-        expect(list.last.next).toBeNull();
-        expect(list.length).toBe(2);
+        listWithValues.removeLast();
+
+        expect(listWithValues.convertValuesToString()).toBe('1,2');
+        expect(listWithValues.last.next).toBeNull();
+        expect(listWithValues.length).toBe(2);
     });
 
     test('RemoveFirst', () => {
-        const list = initWithValues();
-        list.removeFirst();
-        expect(list.convertValuesToString()).toBe('2,3');
-        expect(list.first.prev).toBeNull();
-        expect(list.length).toBe(2);
+        listWithValues.removeFirst();
+
+        expect(listWithValues.convertValuesToString()).toBe('2,3');
+        expect(listWithValues.first.prev).toBeNull();
+        expect(listWithValues.length).toBe(2);
     });
 
     test('FindByValue', () => {
         const list = initWithValues();
+
         expect(list.findByValue(2).value).toBe(2);
     });
 
     test('removeOnceByValue', () => {
-        const list = initWithValues();
-        list.removeOnceByValue(2);
-        expect(list.convertValuesToString()).toBe('1,3');
-        expect(list.length).toBe(2);
+        listWithValues.removeOnceByValue(2);
+
+        expect(listWithValues.convertValuesToString()).toBe('1,3');
+        expect(listWithValues.length).toBe(2);
     });
 
     test('removeAllByValue', () => {
-        const list = new LinkedList();
-        list.insertLast(1).insertLast(2).insertLast(2).insertLast(3);
+        emptyList.insertLast(1).insertLast(2).insertLast(2).insertLast(3);
+        emptyList.removeAllByValue(2);
 
-        list.removeAllByValue(2);
-        expect(list.convertValuesToString()).toBe('1,3');
-        expect(list.length).toBe(2);
+        expect(emptyList.convertValuesToString()).toBe('1,3');
+        expect(emptyList.length).toBe(2);
 
-        list.clear();
+        emptyList.clear();
 
-        list.insertLast(1).insertLast(2).insertLast(2).insertLast(2);
-        list.removeAllByValue(2);
-        expect(list.convertValuesToString()).toBe('1');
-        expect(list.length).toBe(1);
+        emptyList.insertLast(1).insertLast(2).insertLast(2).insertLast(2);
+        emptyList.removeAllByValue(2);
+
+        expect(emptyList.convertValuesToString()).toBe('1');
+        expect(emptyList.length).toBe(1);
     });
 
     test('InsertBefore', () => {
-        const list = initWithValues();
-        list.insertBefore(2, 9);
-        expect(list.convertValuesToString()).toBe('1,9,2,3');
-        expect(list.length).toBe(4);
+        listWithValues.insertBefore(2, 9);
+
+        expect(listWithValues.convertValuesToString()).toBe('1,9,2,3');
+        expect(listWithValues.length).toBe(4);
     });
 
     test('InsertAfter', () => {
-        const list = initWithValues();
-        list.insertAfter(2, 9);
-        expect(list.convertValuesToString()).toBe('1,2,9,3');
-        expect(list.length).toBe(4);
+        listWithValues.insertAfter(2, 9);
+
+        expect(listWithValues.convertValuesToString()).toBe('1,2,9,3');
+        expect(listWithValues.length).toBe(4);
     });
 
     test('Replace', () => {
-        const list = initWithValues();
-        list.replace(2, 9);
-        expect(list.convertValuesToString()).toBe('1,9,3');
-        expect(list.length).toBe(3);
+        listWithValues.replace(2, 9);
+
+        expect(listWithValues.convertValuesToString()).toBe('1,9,3');
+        expect(listWithValues.length).toBe(3);
     });
 
     test('Reverse', () => {
-        const list = initWithValues();
-        list.reverse();
-        expect(list.convertValuesToString()).toBe('3,2,1');
-        expect(list.first.prev).toBeNull();
-        expect(list.last.next).toBeNull();
-        expect(list.length).toBe(3);
+        listWithValues.reverse();
+
+        expect(listWithValues.convertValuesToString()).toBe('3,2,1');
+        expect(listWithValues.first.prev).toBeNull();
+        expect(listWithValues.last.next).toBeNull();
+        expect(listWithValues.length).toBe(3);
     });
 
     test('Clear', () => {
-        const list = initWithValues();
-        list.clear()
-        expect(list.length).toBe(0);
-        expect(list.first).toBeNull();
-        expect(list.last).toBeNull();
+        listWithValues.clear();
+        
+        expect(listWithValues.length).toBe(0);
+        expect(listWithValues.first).toBeNull();
+        expect(listWithValues.last).toBeNull();
     });
 
     test('Throw Errors when call methods on empty list', () => {
-        const list = new LinkedList();
-        const listWithValues = new LinkedList().insertLast(1).insertLast(2);
-
         expect(() => {
-            list.removeLast();
+            emptyList.removeLast();
         }).toThrow('List is empty');
 
         expect(() => {
-            list.removeAllByValue();
+            emptyList.removeAllByValue();
         }).toThrow('List is empty');
 
         expect(() => {
-            list.removeFirst();
+            emptyList.removeFirst();
         }).toThrow('List is empty');
 
         expect(() => {
-            list.findByValue(5);
+            emptyList.findByValue(5);
         }).toThrow('List is empty');
 
         expect(() => {
-            listWithValues.findByValue(3);
+            listWithValues.findByValue(4);
         }).toThrow('Value not found');
 
         expect(() => {
-            list.reverse();
+            emptyList.reverse();
         }).toThrow('List is empty');
 
         try {
-            list.removeOnceByValue(5);
-            list.insertBefore(1, 0);
-            list.insertAfter(1, 2);
-            list.replace(1, 2);
+            emptyList.removeOnceByValue(5);
+            emptyList.insertBefore(1, 0);
+            emptyList.insertAfter(1, 2);
+            emptyList.replace(1, 2);
         } catch (error) {
             expect(error).toEqual({
                 error: 'List is empty',
