@@ -58,6 +58,11 @@ export class LinkedList {
         let newNode = new Node(value);
         let current = this.#first;
 
+        if (!this.#first && !this.#last) {
+            this.#first = newNode;
+            this.#last = newNode;
+        }
+
         this.#first = newNode;
         this.#first.setNext(current);
         this.#length += 1;
@@ -68,7 +73,7 @@ export class LinkedList {
 
     removeLast() {
         if (this.isEmpty) {
-            throw new Error('List is empty')
+            throw new Error('List is empty');
         }
 
         if (this.#length === 1) {
@@ -82,7 +87,7 @@ export class LinkedList {
 
     removeFirst() {
         if (this.isEmpty) {
-            throw new Error('List is empty')
+            throw new Error('List is empty');
         }
 
         if (this.#length === 1) {
@@ -96,14 +101,14 @@ export class LinkedList {
 
     findByValue(value) {
         if (this.isEmpty) {
-            throw new Error('List is empty')
+            throw new Error('List is empty');
         }
 
         let current = this.#first;
 
         while (current.value !== value) {
             if (current.next === null) {
-              throw new Error('Value not found');
+                throw new Error('Value not found');
             } else {
                 current = current.next;
             }
@@ -114,10 +119,10 @@ export class LinkedList {
 
     removeByValue(value) {
         try {
-            const nodeToRemove = this.findByValue(value);
+            let nodeToRemove = this.findByValue(value);
 
             if (nodeToRemove.prev === null) {
-              return this.removeFirst();
+                return this.removeFirst();
             }
 
             if (nodeToRemove.next === null) {
@@ -180,8 +185,8 @@ export class LinkedList {
 
     replace(target, newValue) {
         try {
-          const nodeToreplace = this.findByValue(target);
-          nodeToreplace.value = newValue;
+            const nodeToreplace = this.findByValue(target);
+            nodeToreplace.value = newValue;
 
         } catch (error) {
             console.log(error);
@@ -190,11 +195,11 @@ export class LinkedList {
 
     reverse() {
         if (this.isEmpty) {
-            throw new Error('List is empty')
+            throw new Error('List is empty');
         }
 
         if (this.#first === this.#last) {
-          return this;
+            return this;
         }
 
         let currentNode = this.#first;
@@ -236,30 +241,4 @@ export class LinkedList {
         }
         return nodes.map((node) => node.value).toString();
     }
-
 }
-
-const list = new LinkedList();
-list.insertLast(1).insertLast(2).insertLast(3);
-// console.log(list.convertValuesToString());
-// list.reverse();
-// console.log('2=>', list.structure);
-// list.reverse();
-// console.log(list.structure);
-
-// list.insertBefore(2, 5);
-// console.log(list.structure);
-// list.insertAfter(1, 9);
-// console.log(list.structure);
-// console.log(list.findByValue());
-
-// console.log(list.removeByValue(3));
-// console.log(list.removeLast());
-// console.log(list.removeLast());
-// console.log(list.length);
-// console.log(list.first.value);
-// console.log(list.last.value);
-// console.log(list.first.next.value);
-// console.log(list.first.next.prev.value);
-// list.clear();
-// console.log(list.structure);
