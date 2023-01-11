@@ -8,7 +8,7 @@
     "test": "jest"
   },
   "keywords": ["linkedlist"],
-  "author": "",
+  "author": "Kirill Mukhortov",
   "license": "ISC",
   "devDependencies": {
     "@jest/globals": "^29.3.1",

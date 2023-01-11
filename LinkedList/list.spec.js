@@ -1,4 +1,4 @@
-import { beforeAll, beforeEach, describe, expect, test } from '@jest/globals';
+import { beforeEach, describe, expect, test } from '@jest/globals';
 import { LinkedList } from './list.js';
 
 const initWithValues = () => {
@@ -18,7 +18,7 @@ describe('Linked List', () => {
     beforeEach(() => {
         listWithValues = initWithValues();
         emptyList = new LinkedList();
-    })
+    });
 
     test('Should create list instance', () => {
         expect(listWithValues).toBeInstanceOf(LinkedList);
@@ -95,9 +95,7 @@ describe('Linked List', () => {
     });
 
     test('FindByValue', () => {
-        const list = initWithValues();
-
-        expect(list.findByValue(2).value).toBe(2);
+        expect(listWithValues.findByValue(2).value).toBe(2);
     });
 
     test('removeOnceByValue', () => {
@@ -155,7 +153,7 @@ describe('Linked List', () => {
 
     test('Clear', () => {
         listWithValues.clear();
-        
+
         expect(listWithValues.length).toBe(0);
         expect(listWithValues.first).toBeNull();
         expect(listWithValues.last).toBeNull();

@@ -36,7 +36,7 @@ export class LinkedList {
     }
 
     insertLast(value) {
-        let newNode = new Node(value);
+        const newNode = new Node(value);
 
         if (!this.#first && !this.#last) {
             this.#first = newNode;
@@ -49,14 +49,13 @@ export class LinkedList {
         this.#last = newNode;
 
         this.#length += 1;
-        newNode = null;
 
         return this;
     }
 
     insertFirst(value) {
-        let newNode = new Node(value);
-        let current = this.#first;
+        const newNode = new Node(value);
+        const current = this.#first;
 
         if (!this.#first && !this.#last) {
             this.#first = newNode;
@@ -66,7 +65,6 @@ export class LinkedList {
         this.#first = newNode;
         this.#first.setNext(current);
         this.#length += 1;
-        newNode = current = null;
 
         return this;
     }
@@ -119,7 +117,7 @@ export class LinkedList {
 
     removeOnceByValue(value) {
         try {
-            let nodeToRemove = this.findByValue(value);
+            const nodeToRemove = this.findByValue(value);
 
             if (nodeToRemove.prev === null) {
                 return this.removeFirst();
@@ -131,7 +129,6 @@ export class LinkedList {
 
             nodeToRemove.next.setPrev(nodeToRemove.prev);
             nodeToRemove.prev.setNext(nodeToRemove.next);
-            nodeToRemove = null;
             this.#length -= 1;
 
         } catch (error) {
@@ -172,8 +169,8 @@ export class LinkedList {
 
     insertBefore(target, value) {
         try {
-            let nodeToInsertBefore = this.findByValue(target);
-            let newNode = new Node(value);
+            const nodeToInsertBefore = this.findByValue(target);
+            const newNode = new Node(value);
 
             if (nodeToInsertBefore.prev === null) {
                 this.#length += 1;
@@ -184,7 +181,6 @@ export class LinkedList {
             newNode.setPrev(nodeToInsertBefore.prev);
             newNode.setNext(nodeToInsertBefore);
             newNode.next.setPrev(newNode);
-            nodeToInsertBefore = newNode = null;
             this.#length += 1;
 
         } catch (error) {
@@ -194,8 +190,8 @@ export class LinkedList {
 
     insertAfter(target, value) {
         try {
-            let nodeToInsertAfter = this.findByValue(target);
-            let newNode = new Node(value);
+            const nodeToInsertAfter = this.findByValue(target);
+            const newNode = new Node(value);
 
             if (nodeToInsertAfter.next === null) {
                 return this.insertLast(value);
@@ -206,7 +202,6 @@ export class LinkedList {
             newNode.setNext(nodeToInsertAfter.next);
             newNode.setPrev(nodeToInsertAfter);
             newNode.prev.setNext(newNode);
-            nodeToInsertAfter = newNode = null;
             this.#length += 1;
 
         } catch (error) {
@@ -250,8 +245,6 @@ export class LinkedList {
 
         this.#last = this.#first;
         this.#first = prevNode;
-
-        currentNode = prevNode = nextNode = null;
 
         return this;
     }
