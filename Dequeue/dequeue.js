@@ -3,7 +3,11 @@ import { Queue } from '../Queue/queue.js';
 export class Dequeue extends Queue {
 
     get last() {
-        return this.queue.last.value;
+        if (!this.queue.isEmpty) {
+            return this.queue.last.value;
+        } else {
+            throw new Error('Dequeue is empty');
+        }
     }
 
     unshift(value) {
@@ -15,7 +19,7 @@ export class Dequeue extends Queue {
         if (!this.queue.isEmpty) {
             return this.queue.removeFirst();
         } else {
-            throw new Error('Queue is empty');
+            throw new Error('Dequeue is empty');
         }
     }
 }
