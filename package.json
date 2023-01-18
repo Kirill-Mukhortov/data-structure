@@ -7,7 +7,7 @@
   "scripts": {
     "test": "jest"
   },
-  "keywords": ["linkedlist"],
+  "keywords": ["linkedlist, queue, dequeue"],
   "author": "Kirill Mukhortov",
   "license": "ISC",
   "devDependencies": {

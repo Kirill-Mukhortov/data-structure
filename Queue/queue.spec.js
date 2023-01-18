@@ -34,12 +34,12 @@ describe('Queue', () => {
     });
 
     test('Queue first element must be 10', () => {
-        expect(queueWithValues.head).toBe(10);
+        expect(queueWithValues.first).toBe(10);
     });
 
     test('Shift first element of queue', () => {
         queueWithValues.shift();
-        expect(queueWithValues.head).toBe(11);
+        expect(queueWithValues.first).toBe(11);
         expect(queueWithValues.length).toBe(2);
     });
 
@@ -50,7 +50,7 @@ describe('Queue', () => {
 
     test('Throw Errors when call methods on empty queue', () => {
         expect(() => {
-            emptyQueue.head;
+            emptyQueue.first;
         }).toThrow('Queue is empty');
 
         expect(() => {
