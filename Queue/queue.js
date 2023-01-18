@@ -21,6 +21,7 @@ export class Queue {
 
     push(value) {
         this.#queue.insertLast(value);
+        return this;
     }
 
     shift() {
