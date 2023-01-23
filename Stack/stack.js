@@ -28,6 +28,7 @@ export class Stack {
             this.#head = value;
             this.stack[this.#size] = value;
             this.#size += 1;
+            return this;
         } else {
             throw new Error('Stack is full');
         }
@@ -43,18 +44,3 @@ export class Stack {
         }
     }
 }
-
-const stack = new Stack(10);
-
-stack.push();
-stack.push();
-stack.push();
-stack.pop();
-
-
-console.log(stack.stack);
-console.log(stack.head);
-console.log(stack.size);
-
-// console.log(stack.head); // 3
-
