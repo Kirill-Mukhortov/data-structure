@@ -41,14 +41,3 @@ export class Structure {
 
     }
 }
-
-
-const struct = new Structure(['name', 'lastName', 'age']);
-struct.set('name', 'Jack');
-struct.set('lastName', 'Black');
-struct.set('age', 53);
-
-console.log(struct.get('name'));
-console.log(struct.structure);
-console.log(struct.delete('age'));
-console.log(struct.structure);
