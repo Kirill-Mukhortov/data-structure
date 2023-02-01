@@ -47,7 +47,6 @@ export class LinkedList {
         }
 
         this.#last = newNode;
-
         this.#length += 1;
 
         return this;

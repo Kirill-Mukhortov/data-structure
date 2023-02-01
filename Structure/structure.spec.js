@@ -18,37 +18,37 @@ describe('Structure', () => {
 
     test('Try to set with one param', () => {
         expect(() => {
-            structureWithValues.set('name')
+            structureWithValues.set('name');
         }).toThrow('Need to pass two arguments');
     });
 
     test('Set value', () => {
-        structureWithValues.set('name', 'John')
+        structureWithValues.set('name', 'John');
         expect(structureWithValues.get('name')).toBe('John');
     });
 
     test('Try to get value by a key that does not exist ', () => {
         expect(() => {
-            structureWithValues.get('sex')
+            structureWithValues.get('sex');
         }).toThrow('No such key in structure');
     });
 
     test('Get value', () => {
-        structureWithValues.set('name', 'John')
-        const name = structureWithValues.get('name')
+        structureWithValues.set('name', 'John');
+        const name = structureWithValues.get('name');
         expect(name).toBe('John');
     });
 
     test('Try to delete value by a key that does not exist ', () => {
         expect(() => {
-            structureWithValues.delete('sex')
+            structureWithValues.delete('sex');
         }).toThrow('No such key in structure');
     });
 
     test('Delete value', () => {
-        structureWithValues.delete('name')
+        structureWithValues.delete('name');
         expect(() => {
-            structureWithValues.get('name')
+            structureWithValues.get('name');
         }).toThrow('No such key in structure');
     });
 
