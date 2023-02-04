@@ -7,7 +7,7 @@
   "scripts": {
     "test": "jest"
   },
-  "keywords": ["linkedlist, queue, dequeue"],
+  "keywords": ["dequeue, dynamicArray, linkedlist, queue, stack, structure"],
   "author": "Kirill Mukhortov",
   "license": "ISC",
   "devDependencies": {

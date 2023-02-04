@@ -17,6 +17,10 @@ export class DynamicArray {
         this.#data.insertLast(new Array(this.#maxElements));
     }
 
+    get maxElements() {
+        return this.#maxElements;
+    }
+
     get length() {
         return this.#length;
     }
