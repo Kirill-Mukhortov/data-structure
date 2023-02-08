@@ -7,7 +7,7 @@
   "scripts": {
     "test": "jest"
   },
-  "keywords": ["binary search, dequeue, dynamic array, linked list, queue, stack, structure, vector"],
+  "keywords": ["binary search, dequeue, dynamic array, hash map, linked list, queue, stack, structure, vector"],
   "author": "Kirill Mukhortov",
   "license": "ISC",
   "devDependencies": {
