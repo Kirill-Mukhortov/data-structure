@@ -17,6 +17,10 @@ export class Vector {
         return this.#length;
     }
 
+    get structure() {
+        return this.#buffer;
+    }
+
     get bufferLength() {
         return this.#buffer.length;
     }
@@ -33,11 +37,11 @@ export class Vector {
         return this;
     }
 
-    add(value) {
+    add(value, index = null) {
         if (this.#length >= this.#capacity) {
             this.#increaseBuffer();
         }
-        this.#buffer[this.#length] = value;
+        this.#buffer[index ? index : this.#length] = value;
         this.#length += 1;
 
         return this;
