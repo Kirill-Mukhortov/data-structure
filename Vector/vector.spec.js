@@ -14,9 +14,11 @@ const initWithValues = () => {
 
 describe('Vector', () => {
     let vector;
+    let emptyVector;
 
     beforeEach(() => {
         vector = initWithValues();
+        emptyVector = new Vector();
     });
 
     test('Should create vector instance', () => {
@@ -35,6 +37,12 @@ describe('Vector', () => {
     test('Should increase vector length when add new value into full vector', () => {
         vector.add(5);
         expect(vector.bufferLength).toBe(8);
+    });
+
+    test('Should add value by index', () => {
+        emptyVector.add(4, 3)
+        const element = vector.get(3);
+        expect(element).toBe(4);
     });
 
     test('Get element by index', () => {
