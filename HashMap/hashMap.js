@@ -14,8 +14,8 @@ export class HashMap {
         this.#table = new Vector(this.#capacity);
     }
 
-    get struct() {
-        return this.#table.bufferLength;
+    get structure() {
+        return this.#table.structure;
     }
 
     #setNearestPrimeNumber(number) {
@@ -41,7 +41,19 @@ export class HashMap {
     }
 
     #hashFunction(key) {
+        let hash = 0;
 
+        for (let i = 0; i < key.length; i += 1) {
+            const code = key.charCodeAt(i);
+            hash = ((hash << 5) - hash) + code;
+            hash = hash & hash;
+        }
+
+        return hash % this.#capacity;
+    }
+
+    #checkIsIndexBusy(index) {
+        return this.#table[index] !== undefined;
     }
 
     set(key, value) {
@@ -50,6 +62,18 @@ export class HashMap {
         }
 
         const hashKey = this.#hashFunction(key);
+
+        if (this.#checkIsIndexBusy(hashKey)) {
+            console.log('Ho-Ho-Ho');
+            // если занято, то добавляем туда Связанный список
+        } else {
+            this.#table.add(value, hashKey);
+        }
+
+        return this;
+    }
+
+    get(value) {
 
     }
 
@@ -61,8 +85,12 @@ export class HashMap {
     // если обращаемся к элементу и видим там linked list, то идем уже по методам next и проверяем value
 }
 
-const map = new HashMap(32);
+const map = new HashMap(37); // 32 - не простое, 37 - простое
 
-// map.set(10, 'foo');
+map.set(10, 'foo');
+map.set(10, 'foo');
+map.set(11, 'bar');
+map.set(12, 'baz');
 
-console.log(map.struct);
+
+console.log(map.structure);
