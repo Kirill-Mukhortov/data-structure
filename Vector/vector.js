@@ -48,7 +48,7 @@ export class Vector {
     }
 
     get(index) {
-        if (index + 1 > this.#length) {
+        if (this.#buffer[index] === undefined) {
             throw new Error(`No element with index: ${index}`);
         } else {
             return this.#buffer[index];
