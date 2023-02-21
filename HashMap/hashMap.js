@@ -1,4 +1,5 @@
 import { Vector } from '../Vector/vector.js';
+import { LinkedList } from '../LinkedList/list.js';
 
 export class HashMap {
     #table;
@@ -43,6 +44,10 @@ export class HashMap {
     #hashFunction(key) {
         let hash = 0;
 
+        if (typeof key !== 'string') {
+            key = String(key);
+        }
+
         for (let i = 0; i < key.length; i += 1) {
             const code = key.charCodeAt(i);
             hash = ((hash << 5) - hash) + code;
@@ -52,45 +57,54 @@ export class HashMap {
         return hash % this.#capacity;
     }
 
-    #checkIsIndexBusy(index) {
-        return this.#table[index] !== undefined;
+    #checkIsIndexBusy(index, key = null) {
+        try {
+            if (this.#table.get(index)[0] === String(key)) {
+              return false;
+            }
+            return this.#table.get(index);
+        } catch (error) {}
     }
 
     set(key, value) {
-        if (typeof key !== 'string') {
-            key = String(key);
-        }
-
         const hashKey = this.#hashFunction(key);
 
-        if (this.#checkIsIndexBusy(hashKey)) {
-            console.log('Ho-Ho-Ho');
-            // если занято, то добавляем туда Связанный список
+        if (this.#checkIsIndexBusy(hashKey, key)) {
+            if (this.#checkIsIndexBusy(hashKey) instanceof LinkedList) {
+                const list = this.#table.get(hashKey);
+                list.insertLast([String(key), value]);
+            } else {
+                const oldValue = this.#checkIsIndexBusy(hashKey);
+
+                this.#table.add(new LinkedList(), hashKey);
+
+                const list = this.#table.get(hashKey);
+                list.insertLast(oldValue);
+                list.insertLast([String(key), value]);
+            }
         } else {
-            this.#table.add(value, hashKey);
+            this.#table.add([String(key), value], hashKey);
         }
 
         return this;
     }
 
-    get(value) {
+    get(key) {
+        const hashKey = this.#hashFunction(key);
+        if (this.#checkIsIndexBusy(hashKey) === undefined) {
+            throw new Error(`No element with key: ${key}`);
+        }
 
+        if (this.#checkIsIndexBusy(hashKey) instanceof LinkedList) {
+            let node = this.#table.get(hashKey).first;
+
+            while (node.value[0] !== String(key)) {
+                node = node.next;
+            }
+
+            return node.value[1];
+        } else {
+            return this.#table.get(hashKey)[1];
+        }
     }
-
-
-    // Должен быть вектор
-    // длинна - простое число
-
-    // если ключ уже есть, то на это место ставим linked list
-    // если обращаемся к элементу и видим там linked list, то идем уже по методам next и проверяем value
 }
-
-const map = new HashMap(37); // 32 - не простое, 37 - простое
-
-map.set(10, 'foo');
-map.set(10, 'foo');
-map.set(11, 'bar');
-map.set(12, 'baz');
-
-
-console.log(map.structure);
