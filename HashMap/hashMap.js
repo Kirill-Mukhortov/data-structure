@@ -60,7 +60,7 @@ export class HashMap {
     #checkIsIndexBusy(index, key = null) {
         try {
             if (this.#table.get(index)[0] === String(key)) {
-              return false;
+                return false;
             }
             return this.#table.get(index);
         } catch (error) {}
@@ -104,7 +104,11 @@ export class HashMap {
 
             return node.value[1];
         } else {
-            return this.#table.get(hashKey)[1];
+            if (this.#table.get(hashKey)[0] === String(key)) {
+                return this.#table.get(hashKey)[1];
+            } else {
+                throw new Error(`No element with key: ${key}`);
+            }
         }
     }
 }
