@@ -19,6 +19,14 @@ export class HashMap {
         return this.#table.structure;
     }
 
+    get table() {
+        return this.#table;
+    }
+
+    get hashMapCapacity() {
+        return this.#capacity;
+    }
+
     #setNearestPrimeNumber(number) {
         while (!this.#isPrimeNumber(number)) {
             number += 1;
