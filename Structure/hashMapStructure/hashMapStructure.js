@@ -31,6 +31,8 @@ export class HashMapStructure {
         }
 
         this[key] = value;
+
+        return this;
     }
 
     get(key) {
