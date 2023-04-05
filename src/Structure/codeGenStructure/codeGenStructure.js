@@ -22,22 +22,35 @@ export class CodeGenStructure {
         return Function('key', getIndex);
     }
 
-    get(val) {
-        return this.#data[this.#getIndexCompiled(val)];
+    get(key) {
+        if (this[key] === undefined) {
+            throw new ReferenceError(`No value for key - ${key}`);
+        }
+
+        return this.#data[this.#getIndexCompiled(key)];
     }
 
     set(key, value) {
+        if (!this.hasOwnProperty(key)) {
+            throw new ReferenceError(`There is no key '${key}' in the structure`);
+        }
+
+        if (arguments.length < 2) {
+            throw new Error('Need to pass two arguments');
+        }
+
         this.#data[this.#getIndexCompiled(key)] = value;
         return this;
     }
 }
 
-const s = new CodeGenStructure(['name', 'age']);
-
-s.set('name', 'Bob')
-s.set('age', 33)
-console.log(s.get('name'));
-console.log(s.get('age'));
+// const s = new CodeGenStructure(['name', 'age']);
+//
+// console.log(s.set('name'));
+// s.set('name', 'Bob')
+// s.set('age', 33)
+// console.log(s.get('name'));
+// console.log(s.get('age'));
 // console.log(s.get('ggg'));
 
 // console.log(s);

@@ -54,4 +54,10 @@ export class Vector {
             return this.#buffer[index];
         }
     }
+
+
+    // TODO: Сделать удаление по Р. Лафоре
+    delete(value) {
+
+    }
 }
