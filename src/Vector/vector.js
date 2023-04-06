@@ -56,19 +56,20 @@ export class Vector {
     }
 
     delete(value) {
-        for (const [idx, el] of this.#buffer.entries()) {
-
-            if (el === value) {
-                for (let i = idx; i < this.#buffer.length; i += 1) {
-                    this.#buffer[i] = this.#buffer[i + 1];
-                }
-                this.#length -= 1;
+        let i;
+        for (i = 0; i < this.#buffer.length; i += 1) {
+            if (this.#buffer[i] === value) {
                 break;
             }
+        }
 
-            if (idx + 1 === this.#buffer.length && el !== value) {
-                throw new ReferenceError(`There is no element with value ${value}`);
+        if (i === this.#buffer.length && this.#buffer[i] !== value) {
+            throw new ReferenceError(`There is no element with value: ${value}`);
+        } else {
+            for (let j = i; j < this.#buffer.length; j += 1) {
+                this.#buffer[j] = this.#buffer[j + 1];
             }
+            this.#length -= 1;
         }
 
         return this;

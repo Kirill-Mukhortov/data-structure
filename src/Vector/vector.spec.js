@@ -60,4 +60,10 @@ describe('Vector', () => {
             vector.get(5);
         }).toThrow('No element with index: 5');
     });
+
+    test('Throw an error when trying to delete an element by value that does not exist', () => {
+        expect(() => {
+            vector.delete(5);
+        }).toThrow('There is no element with value: 5');
+    });
 });
