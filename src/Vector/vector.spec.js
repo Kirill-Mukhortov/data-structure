@@ -1,13 +1,13 @@
-import { beforeEach, describe, expect, test } from '@jest/globals';
 import { Vector } from './vector.js';
+import { beforeEach, describe, expect, test } from '@jest/globals';
 
 const initWithValues = () => {
     const vector = new Vector(4);
 
     vector.add(1)
-          .add(2)
-          .add(3)
-          .add(4);
+        .add(2)
+        .add(3)
+        .add(4);
 
     return vector;
 };
@@ -40,7 +40,7 @@ describe('Vector', () => {
     });
 
     test('Should add value by index', () => {
-        emptyVector.add(4, 3)
+        emptyVector.add(4, 3);
         const element = vector.get(3);
         expect(element).toBe(4);
     });
@@ -48,6 +48,11 @@ describe('Vector', () => {
     test('Get element by index', () => {
         const element = vector.get(2);
         expect(element).toBe(3);
+    });
+
+    test('Delete element by value', () => {
+        vector.delete(3);
+        expect(vector.structure).toEqual([1, 2, 4, undefined, undefined]);
     });
 
     test('Throw an error when trying to get an element by index that does not exist', () => {
