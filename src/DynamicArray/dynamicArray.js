@@ -62,7 +62,7 @@ export class DynamicArray {
         let node = this.#getNode(index);
 
         if (index + 1 > this.#length) {
-            throw new Error(`No element with index: ${index}`);
+            throw new ReferenceError(`No element with index: ${index}`);
         }
 
         if (index < this.#maxElements) {

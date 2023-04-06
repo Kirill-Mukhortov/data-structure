@@ -105,7 +105,7 @@ export class LinkedList {
 
         while (current.value !== value) {
             if (current.next === null) {
-                throw new Error('Value not found');
+                throw new ReferenceError('Value not found');
             } else {
                 current = current.next;
             }

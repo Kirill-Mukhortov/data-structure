@@ -100,7 +100,7 @@ export class HashMap {
     get(key) {
         const hashKey = this.#hashFunction(key);
         if (this.#checkIsIndexBusy(hashKey) === undefined) {
-            throw new Error(`No element with key: ${key}`);
+            throw new ReferenceError(`No element with key: ${key}`);
         }
 
         if (this.#checkIsIndexBusy(hashKey) instanceof LinkedList) {
@@ -115,7 +115,7 @@ export class HashMap {
             if (this.#table.get(hashKey)[0] === String(key)) {
                 return this.#table.get(hashKey)[1];
             } else {
-                throw new Error(`No element with key: ${key}`);
+                throw new ReferenceError(`No element with key: ${key}`);
             }
         }
     }

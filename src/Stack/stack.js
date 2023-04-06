@@ -21,7 +21,7 @@ export class Stack {
 
     push(value) {
         if (!value) {
-            throw new Error('No value passed');
+            throw new ReferenceError('No value passed');
         }
 
         if (this.#size !== this.initSize) {

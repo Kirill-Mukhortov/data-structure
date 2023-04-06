@@ -17,12 +17,12 @@ export class Vector {
         return this.#length;
     }
 
-    get structure() {
-        return this.#buffer;
-    }
-
     get bufferLength() {
         return this.#buffer.length;
+    }
+
+    get structure() {
+        return this.#buffer;
     }
 
     #increaseBuffer() {
