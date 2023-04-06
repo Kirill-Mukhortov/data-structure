@@ -55,9 +55,22 @@ export class Vector {
         }
     }
 
-
-    // TODO: Сделать удаление по Р. Лафоре
     delete(value) {
+        for (const [idx, el] of this.#buffer.entries()) {
 
+            if (el === value) {
+                for (let i = idx; i < this.#buffer.length; i += 1) {
+                    this.#buffer[i] = this.#buffer[i + 1];
+                }
+                this.#length -= 1;
+                break;
+            }
+
+            if (idx + 1 === this.#buffer.length && el !== value) {
+                throw new ReferenceError(`There is no element with value ${value}`);
+            }
+        }
+
+        return this;
     }
 }

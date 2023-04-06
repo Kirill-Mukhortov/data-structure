@@ -130,7 +130,9 @@ export class LinkedList {
             nodeToRemove.prev.setNext(nodeToRemove.next);
             this.#length -= 1;
 
-        } catch (error) { }
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     removeAllByValue(value) {
@@ -180,7 +182,9 @@ export class LinkedList {
             newNode.next.setPrev(newNode);
             this.#length += 1;
 
-        } catch (error) { }
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     insertAfter(target, value) {
@@ -199,7 +203,9 @@ export class LinkedList {
             newNode.prev.setNext(newNode);
             this.#length += 1;
 
-        } catch (error) { }
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     replace(target, newValue) {
@@ -207,7 +213,9 @@ export class LinkedList {
             const nodeToreplace = this.findByValue(target);
             nodeToreplace.value = newValue;
 
-        } catch (error) { }
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     reverse() {
