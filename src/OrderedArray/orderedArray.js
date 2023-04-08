@@ -1,11 +1,15 @@
 import { ordArrBinarySearch } from './ordArrBinarySearch.js';
 
-class OrderedArray {
+export class OrderedArray {
     data = [];
     length = 0;
 
     get structure() {
         return this.data;
+    }
+
+    get length() {
+        return this.length;
     }
 
     #shiftLoop(index, reverse = false) {
@@ -76,4 +80,3 @@ class OrderedArray {
     }
 
 }
-
