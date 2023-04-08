@@ -63,13 +63,13 @@ class OrderedArray {
     }
 
     delete(value) {
-        const indexToRemove = ordArrBinarySearch(this.data, value);
+        try {
+            const indexToRemove = this.find(value);
 
-        if (indexToRemove === -1) {
-            throw new ReferenceError(`There is no element with value: ${value}`);
-        } else {
             this.#shiftLoop(indexToRemove);
             this.length -= 1;
+        } catch (error) {
+            console.error(error);
         }
 
         return this;
