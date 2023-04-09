@@ -3,8 +3,8 @@ export function ordArrBinarySearch(array, target) {
     let high = array.length - 1;
     let middle;
 
-    if (array[high] === undefined) {
-        while (array[high] === undefined) {
+    if (array.get(high) === undefined) {
+        while (array.get(high) === undefined) {
             high -= 1;
         }
     }
@@ -12,11 +12,11 @@ export function ordArrBinarySearch(array, target) {
     while (low <= high) {
         middle = Math.floor((low + high) / 2);
 
-        if ((array[middle] > target && array[middle - 1] < target) || array[middle] === target) {
+        if ((array.get(middle) > target && array.get(middle - 1) < target) || array.get(middle) === target) {
             return middle;
         }
 
-        if (array[middle] > target) {
+        if (array.get(middle) > target) {
             high = middle - 1;
         } else {
             low = middle + 1;

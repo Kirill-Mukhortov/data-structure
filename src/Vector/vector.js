@@ -37,18 +37,21 @@ export class Vector {
         return this;
     }
 
-    add(value, index = null) {
+    add(value, index = null, increaseLength = true) {
         if (this.#length >= this.#capacity) {
             this.#increaseBuffer();
         }
-        this.#buffer[index ? index : this.#length] = value;
-        this.#length += 1;
+        this.#buffer[index !== null ? index : this.#length] = value;
+
+        if (increaseLength) {
+            this.#length += 1;
+        }
 
         return this;
     }
 
-    get(index) {
-        if (this.#buffer[index] === undefined) {
+    get(index, needUndef = false) {
+        if (this.#buffer[index] === undefined && !needUndef) {
             throw new Error(`No element with index: ${index}`);
         } else {
             return this.#buffer[index];

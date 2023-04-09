@@ -1,3 +1,4 @@
+import { Vector } from '../Vector/vector.js';
 import { OrderedArray } from './orderedArray.js';
 import { beforeEach, describe, expect, test } from '@jest/globals';
 
@@ -5,13 +6,13 @@ const initWithValues = () => {
     const ordArr = new OrderedArray();
 
     ordArr.insert(5)
-        .insert(5)
-        .insert(9)
-        .insert(8)
-        .insert(7)
-        .insert(10)
-        .insert(3)
-        .insert(6);
+          .insert(5)
+          .insert(9)
+          .insert(8)
+          .insert(7)
+          .insert(10)
+          .insert(3)
+          .insert(6);
 
     return ordArr;
 };
@@ -25,6 +26,10 @@ describe('OrderedArray methods', () => {
 
     test('Should create ordered array instance', () => {
         expect(ordArr).toBeInstanceOf(OrderedArray);
+    });
+
+    test('Should create inner data array instance of vector', () => {
+        expect(ordArr.data).toBeInstanceOf(Vector);
     });
 
     test('Should insert values and sort its', () => {
@@ -44,6 +49,14 @@ describe('OrderedArray methods', () => {
 
         expect(ordArr.structure).toEqual([5, 5, 6, 7, 8, undefined, undefined, undefined]);
         expect(ordArr.length).toBe(5);
+    });
+
+    test('Should increase inner data twice', () => {
+        const orderedArray = new OrderedArray(2);
+        orderedArray.insert(5)
+                    .insert(5)
+                    .insert(9)
+        expect(orderedArray.structure).toEqual([5, 5, 9, undefined]);
     });
 });
 
@@ -71,4 +84,4 @@ describe('Test throw errors', () => {
             });
         }
     });
-})
+});
