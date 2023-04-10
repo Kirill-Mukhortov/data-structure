@@ -16,7 +16,8 @@
     "structure",
     "linked list",
     "binary search",
-    "dynamic array"
+    "dynamic array",
+    "ordered array"
   ],
   "author": "Kirill Mukhortov",
   "license": "ISC",

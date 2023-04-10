@@ -55,8 +55,10 @@ describe('OrderedArray methods', () => {
         const orderedArray = new OrderedArray(2);
         orderedArray.insert(5)
                     .insert(5)
-                    .insert(9)
+                    .insert(9);
+
         expect(orderedArray.structure).toEqual([5, 5, 9, undefined]);
+        expect(orderedArray.length).toBe(3);
     });
 });
 
