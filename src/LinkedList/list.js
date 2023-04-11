@@ -193,8 +193,8 @@ export class LinkedList {
             const newNode = new Node(value);
 
             if (nodeToInsertAfter.next === null) {
-                return this.insertLast(value);
                 this.#length += 1;
+                return this.insertLast(value);
             }
 
             nodeToInsertAfter.next.setPrev(newNode);
@@ -210,8 +210,8 @@ export class LinkedList {
 
     replace(target, newValue) {
         try {
-            const nodeToreplace = this.findByValue(target);
-            nodeToreplace.value = newValue;
+            const nodeToReplace = this.findByValue(target);
+            nodeToReplace.value = newValue;
 
         } catch (error) {
             console.error(error);

@@ -1,7 +1,5 @@
 ## Base data-structures:
 
-***
-
 **Linked list:**
 - [Linked list](https://github.com/Kirill-Mukhortov/data-structure/tree/main/src/LinkedList)
 - [Queue](https://github.com/Kirill-Mukhortov/data-structure/tree/main/src/Queue)
@@ -24,8 +22,6 @@
 
 **Searches:**
 - [Binary search](https://github.com/Kirill-Mukhortov/data-structure/tree/main/src/BinarySearch)
-
-***
 
 ## How to use:
 
