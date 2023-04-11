@@ -9,6 +9,10 @@ export class Queue {
         return this.queue.length;
     }
 
+    get structure() {
+        return this.queue.structure
+    }
+
     get isEmpty() {
         return this.queue.length === 0;
     }

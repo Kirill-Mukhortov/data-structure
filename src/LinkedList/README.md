@@ -62,12 +62,12 @@ list.last;
 
 7. `insertFirst(value)` add node at the beginning of linked list and set link on next node.
 
-> If linked list is empty then the methods `insertLast` and `insertFirst` work the same.
+> If linked list is empty then the methods `insertLast(value)` and `insertFirst(value)` work the same.
 
-8. `removeLast` remove last node from linked list and remove link on it. If linked list is empty, method will throw an error.
+8. `removeLast()` remove last node from linked list and remove link on it. If linked list is empty, method will throw an error.
 
 
-9. `removeFirst` remove first node from linked list and remove link on it. If linked list is empty, method will throw an error.
+9. `removeFirst()` remove first node from linked list and remove link on it. If linked list is empty, method will throw an error.
 
 
 10. `findByValue(value)` find and return node with passed value. Throw an error if node with value not found:
@@ -123,14 +123,14 @@ list.structure;
 // LinkedList => 1 => 5 => 3 => NULL
 ```
 
-16. `reverse` expands the linked list and refactor all links on next and previous. Throw an error if list is empty:
+16. `reverse()` expands the linked list and refactor all links on next and previous. Throw an error if list is empty:
 ```js
 list.reverse();
 list.structure;
 // LinkedList => 3 => 2 => 1 => NULL
 ```
 
-17. `clear` nullifies references to the first and last element and zeros length of the list.
+17. `clear()` nullifies references to the first and last element and zeros length of the list.
 
 
 
