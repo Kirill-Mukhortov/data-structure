@@ -21,15 +21,14 @@ export function binarySearch(target, array) {
 
 
 export function recursiveBinarySearch(target, array) {
-
-    if (array.length < 1) {
-        return -1;
-    }
-
     const middle = Math.floor(array.length / 2);
 
     if (array[middle] === target) {
         return middle;
+    }
+
+    if (array.length <= 1) {
+        return -1;
     }
 
     const searchInLeftPart = array[middle] > target;
