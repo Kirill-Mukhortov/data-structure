@@ -18,3 +18,23 @@ export function binarySearch(target, array) {
 
     return -1;
 }
+
+
+export function recursiveBinarySearch(target, array) {
+
+    if (array.length < 1) {
+        return -1;
+    }
+
+    const middle = Math.floor(array.length / 2);
+
+    if (array[middle] === target) {
+        return middle;
+    }
+
+    const searchInLeftPart = array[middle] > target;
+
+    const result = searchInLeftPart ? recursiveBinarySearch(target, array.slice(0, middle)) : recursiveBinarySearch(target, array.slice(middle));
+
+    return result > -1 ? result + (searchInLeftPart ? 0 : middle) : result;
+}
